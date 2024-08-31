@@ -1,0 +1,198 @@
+@startuml
+class com.example.myapplication.saveActivity {
+~ TextView notcon
+~ Button finishbutton
+~ ProgressBar progress
+~ {static} Bitmap bitmap
+~ {static} String savename
+# void onCreate(Bundle)
+# void onActivityResult(int,int,Intent)
+}
+class com.example.myapplication.ChangeImage {
++ {static} int[] lightX
++ {static} float[] power
++ {static} Bitmap beforeImage
++ {static} int now
+~ {static} void setImage(Bitmap)
+~ {static} void saveImage(String)
+~ {static} void update()
+}
+class com.example.myapplication.RegisterRequest {
+- {static} String URL
+- Map<String,String> parameters
++ Map<String,String> getParams()
+}
+class com.example.myapplication.lightviewFragmentActivity {
+~ Button lightnew
+~ ListView lightlist
+~ ViewGroup rootview
+~ {static} String[] List
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onStart()
+}
+class com.example.myapplication.LoginActivity {
+~ EditText mID
+~ Button mIdSignInButton
+# void onCreate(Bundle)
+}
+class com.example.myapplication.LoginRequest {
+- {static} String URL
+- Map<String,String> parameters
++ Map<String,String> getParams()
+}
+class com.example.myapplication.RootController {
+~ {static} int selected
+~ {static} Bitmap beforeImage
+~ {static} String savename
++ {static} void initialize()
++ {static} void settingBtn()
++ {static} void setting()
++ void loadBtn()
++ {static} void saveBtn()
+}
+class com.example.myapplication.TurnLight {
+~ {static} int height
+~ {static} float[][] Red
+~ {static} float[][] Green
+~ {static} float[][] Blue
+~ {static} float[][] newRed
+~ {static} float[][] newGreen
+~ {static} float[][] newBlue
+~ {static} float lightX
+~ {static} float lightR
+~ {static} float power
+~ {static} float[] Ambient
+~ {static} void getinfo()
+~ {static} Color ambient_color(int,int)
+~ {static} Color diffuse_color(int,int)
+~ {static} Color lambert_color(int,int)
+}
+class com.example.myapplication.picturesettingActivity {
++ {static} int REQUEST_CODE_MENU
+~ Button getpicture
+~ RequestBuilder<Drawable> image
+~ Intent intent
+# void onCreate(Bundle)
+# void onActivityResult(int,int,Intent)
+}
+class com.example.myapplication.ImageInfo {
++ {static} int width
++ {static} int height
+- {static} boolean hasAlphaChannel
+- {static} int pixelLength
+- {static} int[] pixels
+~ {static} int[] getRGB(int,int)
+}
+class com.example.myapplication.setdataFragmentActivity {
+~ EditText lightx
+~ SeekBar power
+~ {static} ViewGroup rootview
+~ {static} Boolean init
+~ Handler handler
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onResume()
++ void nothingselected()
++ void setinfo()
+}
+class com.example.myapplication.setdataFragmentActivity.LightXThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightYThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightZThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightRThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightGThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightBThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightPThread {
++ void run()
+}
+class com.example.myapplication.setdataFragmentActivity.LightAThread {
++ void run()
+}
+class com.example.myapplication.finishActivity {
+~ Button finish
+# void onCreate(Bundle)
+}
+class com.example.myapplication.MakeImage {
+- {static} int width
+- {static} Bitmap newimage
+- {static} Color[][] resultscolor
+- {static} int[][] resultsargb
+~ {static} void setPixel(int,int,Color)
+~ {static} Bitmap returnimage()
+~ {static} void update()
+}
+class com.example.myapplication.RegisterActivity {
+- Button mSubmitButton
+- EditText mName
+- CheckBox checkbox
+- {static} String userName
+# void onCreate(Bundle)
+}
+class com.example.myapplication.imageFragmentActivity {
+~ ImageView imageview
+~ ViewGroup rootView
+~ Button savebutton
++ View onCreateView(LayoutInflater,ViewGroup,Bundle)
++ void onResume()
+}
+class com.example.myapplication.mainscreenActivity {
+~ imageFragmentActivity fragment1
+~ lightviewFragmentActivity fragment2
+~ setdataFragmentActivity fragment3
+~ ViewPager2 pager
+~ TabLayout tabs
+~ MyPagerAdapter adapter
+~ Bitmap before
+~ byte[] beforebyte
+# void onCreate(Bundle)
++ void fragmentsetting1()
++ void fragmentsetting2()
++ void fragmentsetting3()
+}
+class com.example.myapplication.mainscreenActivity.MyPagerAdapter {
+~ int itemCount
++ int getItemCount()
++ Fragment createFragment(int)
+}
+
+
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.saveActivity
+com.android.volley.toolbox.StringRequest <|-- com.example.myapplication.RegisterRequest
+androidx.fragment.app.Fragment <|-- com.example.myapplication.lightviewFragmentActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.LoginActivity
+com.android.volley.toolbox.StringRequest <|-- com.example.myapplication.LoginRequest
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.picturesettingActivity
+androidx.fragment.app.Fragment <|-- com.example.myapplication.setdataFragmentActivity
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightXThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightXThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightYThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightYThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightZThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightZThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightRThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightRThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightGThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightGThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightBThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightBThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightPThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightPThread
+com.example.myapplication.setdataFragmentActivity +.. com.example.myapplication.setdataFragmentActivity.LightAThread
+com.example.myapplication.Thread <|-- com.example.myapplication.setdataFragmentActivity.LightAThread
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.finishActivity
+android.app.Activity <|-- com.example.myapplication.RegisterActivity
+androidx.fragment.app.Fragment <|-- com.example.myapplication.imageFragmentActivity
+androidx.appcompat.app.AppCompatActivity <|-- com.example.myapplication.mainscreenActivity
+com.example.myapplication.mainscreenActivity +.. com.example.myapplication.mainscreenActivity.MyPagerAdapter
+com.example.myapplication.FragmentStateAdapter <|-- com.example.myapplication.mainscreenActivity.MyPagerAdapter
+@enduml
